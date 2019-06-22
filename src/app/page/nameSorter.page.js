@@ -1,22 +1,11 @@
 import React from "react";
 import DisplayCatsName from "../component/displayCatsName.componet";
-import API from "../api/base.api";
+import * as actions from "../actions/actions";
+import { connect } from "react-redux";
 
 class NameSorterPage extends React.Component {
-  state = {
-    ownersWithAllPetsList: [],
-    isError: false
-  };
-
-  async componentDidMount() {
-    try {
-      let userData = await API.get();
-      userData = userData.data;
-      this.setState({ ownersWithAllPetsList: userData, isError: false });
-    } catch (e) {
-      console.log(`Axios request failed: ${e}`);
-      this.setState({ ownersWithAllPetsList: null, isError: true });
-    }
+  componentDidMount() {
+    this.props.fetchPetOwners();
   }
 
   groupByGender = list => {
@@ -48,11 +37,11 @@ class NameSorterPage extends React.Component {
   };
 
   render = () => {
-    const { ownersWithAllPetsList, isError } = this.state;
-    if (isError) {
+    const { petowners } = this.props;
+    if (!petowners) {
       return "Something went wrong! Please check console logs for details. ";
     }
-    var ownersWithOnlyCats = this.getOwnerWithOnlyCats(ownersWithAllPetsList);
+    var ownersWithOnlyCats = this.getOwnerWithOnlyCats(petowners);
     var groupByGenderResult = this.groupByGender(ownersWithOnlyCats);
     return (
       <div className="App">
@@ -67,4 +56,7 @@ class NameSorterPage extends React.Component {
   };
 }
 
-export default NameSorterPage;
+export default connect(
+  state => state,
+  actions
+)(NameSorterPage);
