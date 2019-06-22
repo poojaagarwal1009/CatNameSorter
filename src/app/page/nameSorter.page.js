@@ -1,48 +1,19 @@
 import React from "react";
-import DisplayCatsName from "../component/displayCatsName.componet";
-import * as actions from "../actions/fetchPetOwnerAction";
 import { connect } from "react-redux";
+
+import DisplayCatsNameContainer from "../component/displayCatsName.container";
+import * as actions from "../actions/fetchPetOwnerAction";
 
 class NameSorterPage extends React.Component {
   componentWillMount() {
     this.props.fetchPetOwners();
   }
 
-  groupByGender = list => {
-    const catNameListForMale = [];
-    const catNameListForFemale = [];
-    list.forEach(x => {
-      if (x.gender === "Male") {
-        x.pets.forEach(y => catNameListForMale.push(y.name));
-      } else {
-        x.pets.forEach(y => catNameListForFemale.push(y.name));
-      }
-    });
-    return [
-      { gender: "Male", pets: catNameListForMale },
-      { gender: "Female", pets: catNameListForFemale }
-    ];
-  };
-
-  getOwnerWithOnlyCats = ownersWithPetsList => {
-    return ownersWithPetsList
-      .filter(x => x.pets)
-      .map(y => {
-        return {
-          name: y.name,
-          gender: y.gender,
-          pets: y.pets.filter(b => b.type === "Cat")
-        };
-      });
-  };
-
   render = () => {
     const { petOwners } = this.props;
-    if (!petOwners) {
+    if (petOwners.length < 1) {
       return "Something went wrong! Please check console logs for details. ";
     }
-    var ownersWithOnlyCats = this.getOwnerWithOnlyCats(petOwners);
-    var groupByGenderResult = this.groupByGender(ownersWithOnlyCats);
     return (
       <div className="App">
         <h1>Programming challenge</h1>
@@ -50,7 +21,7 @@ class NameSorterPage extends React.Component {
           List of all the cats in alphabetical order under a heading of the
           gender of their owner.
         </h4>
-        <DisplayCatsName dataSource={groupByGenderResult} />
+        <DisplayCatsNameContainer dataSource={petOwners} />
       </div>
     );
   };

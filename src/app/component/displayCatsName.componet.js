@@ -1,21 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-class DisplayCatsName extends React.PureComponent {
+class DisplayCatsNameComponent extends React.PureComponent {
   static propTypes = {
     dataSource: PropTypes.array.isRequired
   };
 
   static _log(...message) {
-    console.log("|DisplayCatsName|", ...message);
+    console.log("|DisplayCatsNameComponent|", ...message);
   }
 
   render() {
     const { dataSource } = this.props;
     if (!dataSource) {
+      DisplayCatsNameComponent._log("empty data source.");
       return;
     }
-    DisplayCatsName._log(dataSource);
+    DisplayCatsNameComponent._log(dataSource);
 
     return dataSource.map((item, key) => (
       <div key={key}>
@@ -32,4 +33,4 @@ class DisplayCatsName extends React.PureComponent {
   }
 }
 
-export default DisplayCatsName;
+export default DisplayCatsNameComponent;
