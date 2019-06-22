@@ -1,9 +1,8 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://agl-developer-test.azurewebsites.net/",
-  responseType: "json",
-  crossdomain: true
+  baseURL: "https://agl-developer-test.azurewebsites.net/people.json",
+  responseType: "json"
 });
 // export const Http = axios.create({
 //   headers: { "Cache-Control": "no-cache" },

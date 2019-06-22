@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import DisplayCatsName from "../src/app/component/displayCatsName.componet";
-import Api from "../src/app/api/nameList.api";
+import API from "../src/app/api/base.api";
 import "./styles.css";
 
 class App extends React.Component {
@@ -9,23 +9,24 @@ class App extends React.Component {
     ownersWithPetsList: []
   };
 
-  componentDidMount = () => {
-    this.getOwnersWithPetsList();
-  };
-
-  getOwnersWithPetsList() {
-    // fetch("https://agl-developer-test.azurewebsites.net/people.json")
-    //   .then(results => {
-    //     return results.json();
-    //   })
-    //   .then(response => {
-    //     this.setState({ ownersWithPetsList: response });
-    //   })
-    //   .catch(function(error) {
-    //     console.log("Error : " + error);
-    //   });
-    Api.
+  async componentDidMount() {
+    let userData = await API.get();
+    userData = userData.data;
+    this.setState({ ownersWithPetsList: userData });
   }
+
+  // getOwnersWithPetsList() {
+  //   fetch("https://agl-developer-test.azurewebsites.net/people.json")
+  //     .then(results => {
+  //       return results.json();
+  //     })
+  //     .then(response => {
+  //       this.setState({ ownersWithPetsList: response });
+  //     })
+  //     .catch(function(error) {
+  //       console.log("Error : " + error);
+  //     });
+  // }
   groupByGender = list => {
     const catNameListForMale = [];
     const catNameListForFemale = [];

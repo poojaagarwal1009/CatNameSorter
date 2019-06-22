@@ -5,10 +5,10 @@ class NameListApi extends BaseApi {
     super("NameListApi");
   }
 
-  getOwnersAndPetsList() {
+  getOwnersAndPetsList = () => {
     const URL = "people.json";
     return super.get(URL, { crossdomain: true });
-  }
+  };
 }
 
 export default new NameListApi();
