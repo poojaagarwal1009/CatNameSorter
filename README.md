@@ -1,2 +1,0 @@
-# CatnameSorter
-Created with CodeSandbox
