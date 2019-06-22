@@ -1,6 +1,6 @@
 import React from "react";
 import DisplayCatsName from "../component/displayCatsName.componet";
-import * as actions from "../actions/actions";
+import * as actions from "../actions/fetchPetOwnerAction";
 import { connect } from "react-redux";
 
 class NameSorterPage extends React.Component {
