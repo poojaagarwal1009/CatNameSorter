@@ -23,7 +23,6 @@ class BaseApi {
       .get(url)
       .then(response => {
         this._log("get response", response);
-
         return response.data;
       })
       .catch(error => {

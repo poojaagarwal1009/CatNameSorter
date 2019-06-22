@@ -1,41 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 
 import "./styles.css";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      catData: []
-    };
-  }
-
-  componentDidMount = () => {
-    fetch("https://agl-developer-test.azurewebsites.net/people.json")
-      .then(results => {
-        return results.json();
-      })
-      .then(response => {
-        this.setState({ catData: response });
-      })
-      .catch(function(error) {
-        console.log("Error : " + error);
-      });
+  static propTypes = {
+    ownersWithPetsList: PropTypes.array.isRequired
   };
 
-  groupBy = (list, keyGetter) => {
-    const map = new Map();
-    list.forEach(item => {
-      const key = keyGetter(item);
-      const collection = map.get(key);
-      if (!collection) {
-        map.set(key, [item]);
-      } else {
-        collection.push(item);
-      }
-    });
-    return map;
+  state = {
+    ownersWithPetsList: []
+  };
+
+  componentDidMount = () => {
+    this.getOwnersWithPetsList();
   };
 
   groupByGender = list => {
@@ -55,16 +34,10 @@ class App extends React.Component {
   };
 
   render = () => {
-    var result = this.state.catData
-      .filter(x => x.pets)
-      .map(y => {
-        return {
-          name: y.name,
-          gender: y.gender,
-          pets: y.pets.filter(b => b.type === "Cat")
-        };
-      });
-    var groupByGenderResult = this.groupByGender(result);
+    var ownerWithOnlyCats = this.getOwnerWithOnlyCats(
+      this.state.ownersWithPetsList
+    );
+    var groupByGenderResult = this.groupByGender(ownerWithOnlyCats);
     console.log(groupByGenderResult);
     return (
       <div className="App">
@@ -87,6 +60,31 @@ class App extends React.Component {
       </div>
     );
   };
+
+  getOwnerWithOnlyCats = ownersWithPetsList => {
+    return ownersWithPetsList
+      .filter(x => x.pets)
+      .map(y => {
+        return {
+          name: y.name,
+          gender: y.gender,
+          pets: y.pets.filter(b => b.type === "Cat")
+        };
+      });
+  };
+
+  getOwnersWithPetsList() {
+    fetch("https://agl-developer-test.azurewebsites.net/people.json")
+      .then(results => {
+        return results.json();
+      })
+      .then(response => {
+        this.setState({ ownersWithPetsList: response });
+      })
+      .catch(function(error) {
+        console.log("Error : " + error);
+      });
+  }
 }
 
 const rootElement = document.getElementById("root");

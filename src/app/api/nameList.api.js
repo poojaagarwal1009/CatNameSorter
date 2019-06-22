@@ -5,8 +5,8 @@ class NameListApi extends BaseApi {
     super("NameListApi");
   }
 
-  getOwnerAndPetList() {
-    const URL = "http://agl-developer-test.azurewebsites.net/people.json";
+  getOwnersAndPetsList() {
+    const URL = "https://agl-developer-test.azurewebsites.net/people.json";
     return super.get(URL);
   }
 }
