@@ -12,6 +12,9 @@ class DisplayCatsName extends React.PureComponent {
 
   render() {
     const { dataSource } = this.props;
+    if (!dataSource) {
+      return;
+    }
     DisplayCatsName._log(dataSource);
 
     return dataSource.map((item, key) => (

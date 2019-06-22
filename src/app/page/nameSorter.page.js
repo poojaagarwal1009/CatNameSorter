@@ -52,10 +52,8 @@ class NameSorterPage extends React.Component {
     if (isError) {
       return "Something went wrong! Please check console logs for details. ";
     }
-
     var ownersWithOnlyCats = this.getOwnerWithOnlyCats(ownersWithAllPetsList);
     var groupByGenderResult = this.groupByGender(ownersWithOnlyCats);
-    console.log(groupByGenderResult);
     return (
       <div className="App">
         <h1>Programming challenge</h1>
