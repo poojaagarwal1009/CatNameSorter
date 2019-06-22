@@ -4,7 +4,7 @@ import * as actions from "../actions/actions";
 import { connect } from "react-redux";
 
 class NameSorterPage extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchPetOwners();
   }
 
@@ -37,11 +37,11 @@ class NameSorterPage extends React.Component {
   };
 
   render = () => {
-    const { petowners } = this.props;
-    if (!petowners) {
+    const { petOwners } = this.props;
+    if (!petOwners) {
       return "Something went wrong! Please check console logs for details. ";
     }
-    var ownersWithOnlyCats = this.getOwnerWithOnlyCats(petowners);
+    var ownersWithOnlyCats = this.getOwnerWithOnlyCats(petOwners);
     var groupByGenderResult = this.groupByGender(ownersWithOnlyCats);
     return (
       <div className="App">
