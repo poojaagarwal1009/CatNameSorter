@@ -27,3 +27,4 @@ Using Jest and Enzyme to run tests
 ## References 
 - [Redux](https://redux.js.org/docs/basics/UsageWithReact.html) and [Redux Thunk](https://github.com/gaearon/redux-thunk)
 - Testing: [Enzyme](http://airbnb.io/enzyme/), [Expect](https://facebook.github.io/jest/docs/en/expect.html)
+- Travis : [Medium](https://medium.com/quick-code/from-zero-to-deployed-with-react-travisci-and-surge-9be99350cf8b)
