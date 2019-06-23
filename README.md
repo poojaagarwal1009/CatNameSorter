@@ -1,4 +1,4 @@
-# CatnameSorter
+# CatnameSorter  [![Build Status](https://travis-ci.org/poojaagarwal1009/CatnameSorter.svg?branch=master)](https://travis-ci.org/poojaagarwal1009/CatnameSorter)
 
 This application is consuming the json and output a list of all the cats in alphabetical order under a heading of the gender of their owner.
 
