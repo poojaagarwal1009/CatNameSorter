@@ -12,7 +12,7 @@ class DisplayCatsNameContainer extends React.PureComponent {
     console.log("|DisplayCatsNameContainer|", ...message);
   }
 
-  groupByGender = list => {
+  groupByGender(list) {
     const catNameListForMale = [];
     const catNameListForFemale = [];
     list.forEach(x => {
@@ -26,9 +26,9 @@ class DisplayCatsNameContainer extends React.PureComponent {
       { gender: "Male", pets: catNameListForMale },
       { gender: "Female", pets: catNameListForFemale }
     ];
-  };
+  }
 
-  getOwnerWithOnlyCats = ownersWithPetsList => {
+  getOwnerWithOnlyCats(ownersWithPetsList) {
     return ownersWithPetsList
       .filter(x => x.pets)
       .map(y => {
@@ -38,11 +38,11 @@ class DisplayCatsNameContainer extends React.PureComponent {
           pets: y.pets.filter(b => b.type === "Cat")
         };
       });
-  };
+  }
 
   render() {
     const { dataSource } = this.props;
-    if (!dataSource) {
+    if (!dataSource || dataSource.length < 1) {
       DisplayCatsNameContainer._log("empty data source.");
       return;
     }

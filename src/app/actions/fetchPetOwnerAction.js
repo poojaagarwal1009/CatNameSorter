@@ -8,7 +8,7 @@ export function fetchPetOwners() {
         dispatch({ type: "FETCH_PETOWNERS", payload: { petOwners: data } });
       })
       .catch(error => {
-        console.error("|fetchPetOwners| error |", error.response);
+        console.error("|fetchPetOwners| Error |", error.response);
       });
   };
 }
