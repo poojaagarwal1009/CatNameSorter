@@ -5,7 +5,7 @@ import DisplayCatsNameComponet from "../component/displayCatsName.componet";
 
 class DisplayCatsNameContainer extends React.PureComponent {
   static propTypes = {
-    dataSource: PropTypes.array.isRequired
+    dataSource: PropTypes.array
   };
 
   //for logging inside the console along with the container name

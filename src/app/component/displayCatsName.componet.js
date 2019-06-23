@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 class DisplayCatsNameComponent extends React.PureComponent {
   static propTypes = {
-    dataSource: PropTypes.array.isRequired
+    dataSource: PropTypes.array
   };
 
   //for logging inside the console along with the component name
