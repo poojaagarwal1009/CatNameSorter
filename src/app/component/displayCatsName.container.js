@@ -8,11 +8,12 @@ class DisplayCatsNameContainer extends React.PureComponent {
     dataSource: PropTypes.array.isRequired
   };
 
+  //for logging inside the console along with the container name
   static _log(...message) {
     console.log("|DisplayCatsNameContainer|", ...message);
   }
 
-  //
+  //method to sort the list based on the gender
   groupByGender(list) {
     const catNameListForMale = [];
     const catNameListForFemale = [];
@@ -29,6 +30,7 @@ class DisplayCatsNameContainer extends React.PureComponent {
     ];
   }
 
+  //method to get owner with only cats
   getOwnerWithOnlyCats(ownersWithPetsList) {
     return ownersWithPetsList
       .filter(x => x.pets)

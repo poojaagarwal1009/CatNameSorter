@@ -6,6 +6,7 @@ class DisplayCatsNameComponent extends React.PureComponent {
     dataSource: PropTypes.array.isRequired
   };
 
+  //for logging inside the console along with the component name
   static _log(...message) {
     console.log("|DisplayCatsNameComponent|", ...message);
   }
