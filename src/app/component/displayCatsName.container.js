@@ -12,6 +12,7 @@ class DisplayCatsNameContainer extends React.PureComponent {
     console.log("|DisplayCatsNameContainer|", ...message);
   }
 
+  //
   groupByGender(list) {
     const catNameListForMale = [];
     const catNameListForFemale = [];

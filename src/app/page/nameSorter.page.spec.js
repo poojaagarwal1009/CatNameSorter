@@ -1,63 +1,65 @@
 import NameSorterPage from "../page/nameSorter.page";
 import React from "react";
-import Enzyme, { shallow } from "enzyme";
+import Enzyme, { mount } from "enzyme";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-
 import Adapter from "enzyme-adapter-react-16";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const initialState = [
+const petOwnerList = [
   {
-    gender: "Male",
-    pets: ["Molly", "Angel", "Tigger"]
+    name: "Jennifer",
+    gender: "Female",
+    age: 18,
+    pets: [
+      {
+        name: "Garfield",
+        type: "Cat"
+      }
+    ]
   },
   {
-    gender: "Femal",
-    pets: ["Jasper", "Gizmo"]
+    name: "Steve",
+    gender: "Male",
+    age: 45,
+    pets: null
   }
 ];
-
-const setup = (state = initialState) => {
-  const props = {
-    match: {
-      params: { claimId: 11030 }
-    }
-  };
-
+let store;
+beforeEach(() => {
   const middlewares = [thunk];
   const mockStore = configureMockStore(middlewares);
-  const store = mockStore(state);
-  const wrapper = shallow(
-    <Provider store={store}>
-      <NameSorterPage />
-    </Provider>
-  );
-
-  return {
-    props,
-    wrapper
-  };
-};
+  store = mockStore({});
+});
 
 describe("pages", () => {
   describe("NameSorterPage", () => {
-    it("should render no details", () => {
-      const { wrapper } = setup(undefined);
+    it("should render error message for no state value", () => {
+      const wrapper = mount(
+        <Provider store={store}>
+          <NameSorterPage />
+        </Provider>
+      );
       expect(wrapper).toBeDefined();
-      expect(wrapper.find("div").length).toBe(0);
+      expect(wrapper.find("h4").length).toBe(1);
+      expect(wrapper.find("h4").text()).toEqual(
+        "Something went wrong! Please check console logs for details"
+      );
+      expect(wrapper.find(".div").length).toEqual(0);
     });
 
-    // it("should render error message when props are passed", () => {
-    //   const wrapper = shallow(<NameSorterPage />);
-    //   expect(wrapper.find("div").length).toEqual(0);
-    // });
-
-    // it("should render div when props are passed", () => {
-    //   const wrapper = shallow(<NameSorterPage />);
-    //   expect(wrapper.find("div").length).toEqual(0);
-    // });
+    it("should render div when props are passed", () => {
+      const props = {
+        petOwners: petOwnerList
+      };
+      const wrapper = mount(
+        <Provider store={store}>
+          <NameSorterPage {...props} />
+        </Provider>
+      );
+      expect(wrapper.find(".App").length).toEqual(1);
+    });
   });
 });

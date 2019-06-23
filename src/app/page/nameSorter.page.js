@@ -10,10 +10,11 @@ class NameSorterPage extends React.Component {
   }
 
   render = () => {
-    console.log(this.props.petOwners);
     const { petOwners } = this.props;
-    if (petOwners.length < 1) {
-      return "Something went wrong! Please check console logs for details. ";
+    if (!petOwners || petOwners.length < 1) {
+      return (
+        <h4>Something went wrong! Please check console logs for details</h4>
+      );
     }
     return (
       <div className="App">
