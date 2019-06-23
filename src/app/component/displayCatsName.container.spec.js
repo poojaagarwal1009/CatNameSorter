@@ -28,6 +28,21 @@ const ownerListWithAllPets = {
   ]
 };
 
+const ownersWithOnlyCats = {
+  dataSource: [
+    {
+      name: "Jennifer",
+      gender: "Female",
+      pets: [
+        {
+          name: "Garfield",
+          type: "Cat"
+        }
+      ]
+    }
+  ]
+};
+
 describe("components", () => {
   describe("DisplayCatsNameContainer", () => {
     it("should not render div when props are not passed", () => {
@@ -44,16 +59,27 @@ describe("components", () => {
       expect(wrapper.instance().groupByGender).not.toHaveBeenCalled();
     });
 
-    it("should return the owners with only cats when getOwnerWithOnlyCats is called", () => {
-      jest.spyOn(DisplayCatsNameContainer.prototype, "getOwnerWithOnlyCats");
-      jest.spyOn(DisplayCatsNameContainer.prototype, "groupByGender");
+    it("should call getOwnerWithOnlyCats with correct parameters is called", () => {
       const wrapper = shallow(
         <DisplayCatsNameContainer
           dataSource={ownerListWithAllPets.dataSource}
         />
       );
 
-      expect(wrapper.instance().getOwnerWithOnlyCats).toHaveBeenCalledTimes(1);
+      expect(wrapper.instance().getOwnerWithOnlyCats).toHaveBeenCalledWith(
+        ownerListWithAllPets.dataSource
+      );
+    });
+
+    it("should call groupByGender with correct parameters is called", () => {
+      const wrapper = shallow(
+        <DisplayCatsNameContainer
+          dataSource={ownerListWithAllPets.dataSource}
+        />
+      );
+      expect(wrapper.instance().groupByGender).toHaveBeenCalledWith(
+        ownersWithOnlyCats.dataSource
+      );
     });
   });
 });

@@ -36,7 +36,6 @@ describe("components", () => {
       const wrapper = shallow(
         <DisplayCatsNameComponet dataSource={props.dataSource} />
       );
-      console.log(wrapper.find("div"));
       const firstListChildren = wrapper.first("ul").childAt(1);
       expect(firstListChildren.map(child => child.childAt(0).text())).toEqual([
         "Angel"
